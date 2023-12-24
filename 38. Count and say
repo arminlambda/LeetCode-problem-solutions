@@ -1,0 +1,28 @@
+class Solution:
+    def countAndSay(self, n: int) -> str:
+
+        if n == 1:
+            return "1"
+
+        sequence = "11"
+        for i in range(n - 2):
+            compressed = ""
+            cnt = 1
+
+            for j in range(1, len(sequence)):
+                if sequence[j] == sequence[j - 1]:
+                    count += 1
+                else:
+                    compressed += f"{cnt}{sequence[j - 1]}"
+                    cnt = 1
+
+            compressed += f"{cnt}{sequence[-1]}"
+            sequence = compressed
+
+            
+
+        return sequence
+
+#LeetCode 38. Count and say
+
+        
