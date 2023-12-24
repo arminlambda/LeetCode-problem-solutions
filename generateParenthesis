@@ -1,0 +1,25 @@
+class Solution:
+    def generateParenthesis(self, n: int) -> List[str]:
+    
+    
+        if n == 0:
+            return [""]
+
+        result = []
+        stack = [(0, 0, "")]  
+
+        while stack:
+            open_cnt, close_cnt, current = stack.pop()
+
+            if open_cnt + close_cnt == 2 * n:
+                result.append(current)
+                continue
+
+            if open_cnt < n:
+                stack.append((open_cnt + 1, close_cnt, current+ "("))
+
+            if close_cnt < open_cnt:
+                stack.append((open_cnt, close_cnt + 1, current + ")"))
+
+        return result
+
