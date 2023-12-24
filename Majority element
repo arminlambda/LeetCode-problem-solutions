@@ -1,0 +1,22 @@
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
+        
+        dic = {}
+
+        for i in nums:
+            if i not in dic:
+                dic[i] = 1
+            elif i in dic:
+                dic[i] += 1
+        
+        
+
+        cnt = 0
+        most = None
+        for key, count in dic.items():
+            if count > cnt:
+                cnt = count
+                most = key
+
+        return most
+            
