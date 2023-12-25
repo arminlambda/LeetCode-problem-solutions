@@ -1,0 +1,39 @@
+
+
+class Solution:
+    
+    from collections import Counter, defaultdict
+
+    def findSubstring(self, s: str, words: List[str]) -> List[int]:
+        
+        
+        word_length = len(words[0])
+        total_words = len(words)
+        word_count = Counter(words)
+        concatenated_indexes = []
+        s_length = len(s)
+
+        for i in range(word_length):
+            window_start = i
+            window = Counter()
+        
+            for j in range(i, s_length - word_length + 1, word_length):
+                current_word = s[j:j + word_length]
+
+                if current_word not in word_count:
+                    window_start = j + word_length
+                    window.clear()
+                    continue
+
+                window[current_word] += 1
+
+                while window[current_word] > word_count[current_word]:
+                    window[s[window_start:window_start + word_length]] -= 1
+                    window_start += word_length
+
+                if window == word_count:
+                    concatenated_indexes.append(window_start)
+
+        return concatenated_indexes
+
+        
