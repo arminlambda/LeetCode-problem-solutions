@@ -1,0 +1,24 @@
+class Solution:
+    def isMatch(self, s: str, p: str) -> bool:
+        sss, ppp, lmci, lsi = 0, 0, 0, -1
+        
+
+        while sss < len(s):
+            if ppp < len(p) and (s[sss] == p[ppp] or p[ppp] == '?'):
+                sss += 1
+                ppp += 1
+            elif ppp < len(p) and p[ppp] == '*':
+                lmci = sss
+                lsi = ppp
+                ppp += 1
+            elif lsi != -1:
+                ppp = lsi + 1
+                sss = lmci + 1
+                lmci += 1
+            else:
+                return False
+
+        while ppp < len(p) and p[ppp] == '*':
+            ppp += 1
+
+        return ppp == len(p)
